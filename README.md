@@ -4,7 +4,7 @@
 
 ### The World's First Generative Media Documentation Engine
 
-**Stop reading code. Start watching it.**
+**Stop reading code. Start watching it. Now with Voice-to-Code Support Copilot & VS Code Integration.**
 
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-logorhythms.in-b  lue?style=for-the-badge)](https://logorhythms.in)
 
@@ -21,7 +21,7 @@
 
 <br/>
 
-> *Connect any GitHub repository → AI parses every file with Tree-sitter → Amazon Nova models generate narrated walkthroughs → Press Play and watch code explain itself with synced audio, auto-scrolling, and live highlighting — like a YouTube video for your codebase.*
+> *Connect any GitHub repository → AI parses every file with Tree-sitter → Amazon Nova models generate narrated walkthroughs & map support tickets to code → Press Play and watch code explain itself with synced audio, auto-scrolling, and live highlighting — like a YouTube video for your codebase.*
 
 </div>
 
@@ -70,6 +70,23 @@ The flagship feature. A fully custom audio-synced code player:
 - **Real-time sync** — Audio playback is married to code highlighting. As the narrator speaks about lines 42–58, those lines auto-scroll into view and glow
 - **Full playback controls** — Play / Pause / Skip / Seek / Speed (0.5x–2x) / Mute
 - **Two view modes** — *Developer Mode* (inputs, outputs, complexity, edge cases) and *Manager Mode* (business-level summary)
+
+### 🚨 DocuVerse Signal (Support-to-Code Copilot)
+The ultimate bridge between customer support and engineering:
+- **End-to-End Pipeline** — Ingests raw support tickets, auto-classifies them, and semantically clusters related issues.
+- **AI Code Mapping** — Traces user-reported bugs directly to the specific files and line numbers in your codebase that need fixing.
+- **Automated Issue Generation** — Converts grouped tickets into high-quality, structured GitHub Issues with proposed code fixes.
+
+### 💻 Official VS Code Extension
+DocuVerse lives where you work — straight inside your IDE:
+- **In-Editor Auto-Cast** — Watch narrated, audio-synced code walkthroughs without ever leaving your editor.
+- **Integrated Tooling** — Run impact analysis, visualize Mermaid diagrams, and generate repository documentation natively.
+- **Signal Webview Panel** — Manage support tickets, review AI-mapped code locations, and generate GitHub issues seamlessly.
+
+### 🌌 Premium Cinematic UI & Motion Design
+- **High-End Dark Theme** — A stunning, highly-polished aesthetic inspired by modern, premium developer tools.
+- **Dynamic Scroll Animations** — Powered by Framer Motion, components elegantly react to scroll position, creating an interface that feels alive.
+- **Glassmorphism & Gradients** — Deep blue-to-purple accents, sophisticated blur effects, and meticulous typography.
 
 ### 📊 Auto-Generated Diagrams
 - One click → **Mermaid.js diagrams** rendered from actual code structure
@@ -392,8 +409,10 @@ flowchart LR
 
 ```mermaid
 flowchart TB
-    subgraph Client["🖥️ Frontend — Next.js 14 (Netlify)"]
-        UI[React UI + Zustand State]
+    subgraph Client["🖥️ Clients (Web + VS Code)"]
+        UI[Next.js UI + Zustand State]
+        VSCode[VS Code Extension]
+        Signal[Signal Dashboard]
         Player[Walkthrough Player]
         FileExp[File Explorer]
         Sandbox[Live Sandbox]
@@ -427,6 +446,9 @@ flowchart TB
 
     UI --> Auth
     UI --> RepoMgr
+    VSCode --> Auth
+    VSCode --> RepoMgr
+    Signal --> RepoMgr
     Player --> ScriptGen
     Player --> AudioGen
     FileExp --> RepoMgr
@@ -916,6 +938,14 @@ DocuVerse-Ai/
 │   │   └── models/
 │   │       └── schemas.py            # 60+ Pydantic models for API contracts
 │   └── repos/                        # Cloned repos (ephemeral on App Runner)
+│
+├── docuverse-vscode/                 # Official VS Code Extension
+│   ├── src/                          # Extension source code
+│   │   ├── extension.ts              # Activation logic & command registration
+│   │   ├── webviews/                 # React-based webviews (Signal, Walkthrough)
+│   │   └── auth/                     # GitHub authentication integration
+│   ├── package.json                  # Extension manifest & commands
+│   └── README.md                     # Extension documentation
 │
 ├── frontend/                         # Next.js 14 + TypeScript
 │   ├── netlify.toml                  # Netlify build config (Next.js SSR plugin)
