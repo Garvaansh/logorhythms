@@ -39,9 +39,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        'display': ['var(--font-dm-sans)', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+        'display': ['var(--font-inter)', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
         'mono':    ['var(--font-jetbrains-mono)', 'SF Mono', 'Fira Code', 'monospace'],
-        'sans':    ['var(--font-dm-sans)', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+        'sans':    ['var(--font-inter)', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         'ios-title1':   ['1.75rem', { lineHeight: '1.2', letterSpacing: '-0.02em', fontWeight: '700' }],

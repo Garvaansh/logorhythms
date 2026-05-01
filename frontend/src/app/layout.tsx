@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
-import { DM_Sans, JetBrains_Mono } from 'next/font/google'
+import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { Providers } from './providers'
 
-const dmSans = DM_Sans({ 
+const inter = Inter({ 
   subsets: ['latin'],
-  variable: '--font-dm-sans',
+  variable: '--font-inter',
   display: 'swap',
   fallback: ['-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Segoe UI', 'sans-serif'],
 })
@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body 
-        className={`${dmSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
         suppressHydrationWarning
       >
         <Providers>
