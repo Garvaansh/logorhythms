@@ -20,7 +20,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { billing, type GeoPricing, type SubscribeResponse } from '@/lib/api'
 import { useUserStore } from '@/lib/store'
-import GradientMesh from '@/components/landing/GradientMesh'
 import Script from 'next/script'
 
 const ease = [0.23, 1, 0.32, 1] as const
@@ -161,7 +160,7 @@ export default function PricingPage() {
         },
         prefill: {},
         theme: {
-          color: '#6366f1',
+          color: '#FF6363',
         },
         modal: {
           ondismiss: () => setSubscribing(null),
@@ -189,20 +188,28 @@ export default function PricingPage() {
         onLoad={() => setRazorpayLoaded(true)}
       />
 
-      <div className="min-h-screen bg-[#050505] text-white overflow-x-hidden selection:bg-indigo-500/30">
+      <div className="min-h-screen selection:bg-[var(--lp-accent)]/20"
+        style={{
+          background: 'var(--lp-bg)',
+          color: 'var(--lp-text-heading)',
+          fontFeatureSettings: '"calt" 1, "kern" 1, "liga" 1, "ss03" 1',
+          letterSpacing: '0.2px',
+        }}>
         {/* ─── Header ─── */}
-        <header className="fixed top-0 inset-x-0 z-50 bg-[#050505]/80 backdrop-blur-2xl border-b border-white/[0.06]">
+        <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-2xl"
+          style={{ background: 'color-mix(in srgb, var(--lp-bg) 85%, transparent)', borderBottom: '1px solid var(--lp-border)' }}>
           <div className="max-w-[1400px] mx-auto px-6 sm:px-10 h-16 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2.5 group">
               <img src="/logo.png" alt="DocuVerse" className="w-7 h-7 rounded-lg object-cover" />
-              <span className="text-[15px] font-semibold tracking-tight text-white/80 group-hover:text-white transition-colors">
+              <span className="text-[15px] font-semibold tracking-tight transition-colors" style={{ color: 'var(--lp-text-heading)' }}>
                 DocuVerse
               </span>
             </Link>
             <div className="flex items-center gap-4">
               <Link
                 href={isAuthenticated ? '/dashboard' : '/auth/signin'}
-                className="text-[13px] text-white/40 hover:text-white transition-colors flex items-center gap-1.5"
+                className="text-[13px] font-medium transition-colors flex items-center gap-1.5 hover:opacity-60"
+                style={{ color: 'var(--lp-text-muted)', letterSpacing: '0.2px' }}
               >
                 <ArrowLeft className="w-3.5 h-3.5" />
                 {isAuthenticated ? 'Dashboard' : 'Sign in'}
@@ -213,21 +220,24 @@ export default function PricingPage() {
 
         {/* ─── Hero ─── */}
         <section className="relative pt-32 pb-20 sm:pt-40 sm:pb-28">
-          <GradientMesh className="opacity-40" />
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full blur-[140px]" style={{ background: 'var(--lp-warm-glow)' }} />
+          </div>
 
           <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
             <motion.span
-              className="inline-flex items-center gap-2 text-[12px] tracking-[0.2em] uppercase text-indigo-400/70 mb-6 font-medium"
+              className="inline-flex items-center gap-2 text-[12px] tracking-[0.2em] uppercase mb-6 font-semibold"
+              style={{ color: 'var(--lp-accent)' }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease }}
             >
-              <span className="w-8 h-[1px] bg-indigo-500/50" />
               Pricing
             </motion.span>
 
             <motion.h1
-              className="text-[clamp(2rem,5vw,4rem)] font-bold tracking-[-0.04em] leading-[0.95] mb-6"
+              className="text-[clamp(2rem,5vw,4rem)] font-semibold tracking-tight leading-[0.95] mb-6"
+              style={{ color: 'var(--lp-text-heading)', letterSpacing: '0px' }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease, delay: 0.1 }}
@@ -236,7 +246,8 @@ export default function PricingPage() {
             </motion.h1>
 
             <motion.p
-              className="text-lg text-white/30 max-w-lg mx-auto leading-relaxed"
+              className="text-lg max-w-lg mx-auto leading-[1.60] font-medium"
+              style={{ color: 'var(--lp-text-muted)', letterSpacing: '0.2px' }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease, delay: 0.2 }}
@@ -251,7 +262,7 @@ export default function PricingPage() {
           <div className="max-w-[1100px] mx-auto px-6 sm:px-10">
             {loading ? (
               <div className="flex justify-center py-20">
-                <Loader2 className="w-6 h-6 text-indigo-400 animate-spin" />
+                <Loader2 className="w-6 h-6 animate-spin" style={{ color: 'var(--lp-accent)' }} />
               </div>
             ) : (
               <motion.div
@@ -341,10 +352,10 @@ export default function PricingPage() {
         </section>
 
         {/* ─── Feature Comparison ─── */}
-        <section className="relative py-20 sm:py-28 border-t border-white/[0.04]">
+        <section className="relative py-20 sm:py-28" style={{ borderTop: '1px solid var(--lp-border)' }}>
           <div className="max-w-[1000px] mx-auto px-6 sm:px-10">
             <motion.h2
-              className="text-2xl sm:text-3xl font-bold tracking-[-0.02em] text-center mb-12"
+              className="text-[32px] sm:text-[40px] font-semibold tracking-tight text-center mb-12"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -353,26 +364,28 @@ export default function PricingPage() {
             </motion.h2>
 
             <motion.div
-              className="rounded-2xl border border-white/[0.06] overflow-hidden bg-[#0a0a0f]"
+              className="rounded-2xl overflow-hidden"
+              style={{ background: 'var(--lp-card)', border: '1px solid var(--lp-card-border)', boxShadow: 'var(--lp-shadow-ring), var(--lp-shadow-ring-inset)' }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
               {/* Header */}
-              <div className="grid grid-cols-4 gap-4 px-6 py-4 bg-white/[0.02] border-b border-white/[0.06]">
-                <div className="text-[13px] text-white/30 font-medium">Feature</div>
-                <div className="text-[13px] text-white/50 font-semibold text-center">Free</div>
-                <div className="text-[13px] text-purple-400 font-semibold text-center">Pro</div>
-                <div className="text-[13px] text-cyan-400 font-semibold text-center">Team</div>
+              <div className="grid grid-cols-4 gap-4 px-6 py-4" style={{ background: 'var(--lp-surface)', borderBottom: '1px solid var(--lp-border)' }}>
+                <div className="text-[13px] font-medium" style={{ color: 'var(--lp-text-faint)' }}>Feature</div>
+                <div className="text-[13px] font-semibold text-center" style={{ color: 'var(--lp-text-heading)' }}>Free</div>
+                <div className="text-[13px] font-semibold text-center" style={{ color: 'var(--lp-accent)' }}>Pro</div>
+                <div className="text-[13px] font-semibold text-center" style={{ color: '#22d3ee' }}>Team</div>
               </div>
 
               {/* Rows */}
               {COMPARISON_ROWS.map((row, i) => (
                 <div
                   key={row.label}
-                  className={`grid grid-cols-4 gap-4 px-6 py-3.5 ${i < COMPARISON_ROWS.length - 1 ? 'border-b border-white/[0.04]' : ''}`}
+                  className="grid grid-cols-4 gap-4 px-6 py-3.5"
+                  style={{ borderBottom: i < COMPARISON_ROWS.length - 1 ? '1px solid var(--lp-border)' : 'none' }}
                 >
-                  <div className="text-[13px] text-white/60">{row.label}</div>
+                  <div className="text-[13px] font-medium" style={{ color: 'var(--lp-text-muted)' }}>{row.label}</div>
                   <ComparisonCell value={row.free} />
                   <ComparisonCell value={row.pro} />
                   <ComparisonCell value={row.team} />
@@ -383,10 +396,10 @@ export default function PricingPage() {
         </section>
 
         {/* ─── FAQ ─── */}
-        <section className="relative py-20 sm:py-28 border-t border-white/[0.04]">
+        <section className="relative py-20 sm:py-28" style={{ borderTop: '1px solid var(--lp-border)' }}>
           <div className="max-w-[700px] mx-auto px-6 sm:px-10">
             <motion.h2
-              className="text-2xl sm:text-3xl font-bold tracking-[-0.02em] text-center mb-12"
+              className="text-[32px] sm:text-[40px] font-semibold tracking-tight text-center mb-12"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -398,7 +411,8 @@ export default function PricingPage() {
               {FAQ_ITEMS.map((faq, i) => (
                 <motion.div
                   key={i}
-                  className="rounded-xl border border-white/[0.06] bg-[#0a0a0f] overflow-hidden"
+                  className="rounded-xl overflow-hidden"
+                  style={{ background: 'var(--lp-card)', border: '1px solid var(--lp-card-border)', boxShadow: 'var(--lp-shadow-ring), var(--lp-shadow-ring-inset)' }}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -406,11 +420,12 @@ export default function PricingPage() {
                 >
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex items-center justify-between px-5 py-4 text-left"
+                    className="w-full flex items-center justify-between px-5 py-4 text-left group"
                   >
-                    <span className="text-[14px] font-medium text-white/80">{faq.q}</span>
+                    <span className="text-[14px] font-medium group-hover:opacity-70 transition-opacity" style={{ color: 'var(--lp-text-heading)' }}>{faq.q}</span>
                     <ChevronDown
-                      className={`w-4 h-4 text-white/30 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`}
+                      className={`w-4 h-4 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`}
+                      style={{ color: 'var(--lp-text-faint)' }}
                     />
                   </button>
                   {openFaq === i && (
@@ -420,7 +435,7 @@ export default function PricingPage() {
                       animate={{ opacity: 1, height: 'auto' }}
                       transition={{ duration: 0.3 }}
                     >
-                      <p className="text-[13px] text-white/40 leading-relaxed">{faq.a}</p>
+                      <p className="text-[13px] leading-relaxed font-medium" style={{ color: 'var(--lp-text-muted)' }}>{faq.a}</p>
                     </motion.div>
                   )}
                 </motion.div>
@@ -430,18 +445,25 @@ export default function PricingPage() {
         </section>
 
         {/* ─── CTA ─── */}
-        <section className="relative py-24 sm:py-32 border-t border-white/[0.04]">
-          <GradientMesh className="opacity-30" />
+        <section className="relative py-24 sm:py-32" style={{ borderTop: '1px solid var(--lp-border)' }}>
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[300px] rounded-full blur-[100px]" style={{ background: 'var(--lp-warm-glow)' }} />
+          </div>
           <div className="relative z-10 text-center px-6">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-[-0.02em] mb-4">
+            <h2 className="text-[32px] sm:text-[40px] font-semibold tracking-tight mb-4" style={{ color: 'var(--lp-text-heading)' }}>
               Ready to understand your codebase?
             </h2>
-            <p className="text-white/30 text-[15px] mb-8 max-w-md mx-auto">
+            <p className="text-[15px] mb-8 max-w-md mx-auto font-medium" style={{ color: 'var(--lp-text-muted)' }}>
               Start with the free tier — no credit card required.
             </p>
             <Link
               href={isAuthenticated ? '/dashboard' : '/auth/signin'}
-              className="group inline-flex items-center gap-2.5 bg-white text-black font-semibold text-[15px] px-8 py-3.5 rounded-full hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] active:scale-[0.96] transition-all duration-500"
+              className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-[86px] text-[15px] font-semibold transition-opacity duration-200 hover:opacity-80 active:scale-[0.96]"
+              style={{
+                background: 'var(--lp-cta-bg)',
+                color: 'var(--lp-cta-text)',
+                boxShadow: 'var(--lp-shadow-btn)',
+              }}
             >
               Get Started Free
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -450,12 +472,12 @@ export default function PricingPage() {
         </section>
 
         {/* ─── Footer ─── */}
-        <footer className="border-t border-white/[0.04] py-8">
+        <footer className="py-8" style={{ borderTop: '1px solid var(--lp-border)' }}>
           <div className="max-w-[1400px] mx-auto px-6 sm:px-10 flex items-center justify-between">
-            <span className="text-[12px] text-white/15">© 2026 DocuVerse</span>
+            <span className="text-[12px] font-medium" style={{ color: 'var(--lp-text-faint)' }}>© 2026 DocuVerse</span>
             <div className="flex items-center gap-1.5">
-              <Shield className="w-3 h-3 text-white/15" />
-              <span className="text-[12px] text-white/15">Payments secured by Razorpay</span>
+              <Shield className="w-3 h-3" style={{ color: 'var(--lp-text-faint)' }} />
+              <span className="text-[12px] font-medium" style={{ color: 'var(--lp-text-faint)' }}>Payments secured by Razorpay</span>
             </div>
           </div>
         </footer>
@@ -463,7 +485,6 @@ export default function PricingPage() {
     </>
   )
 }
-
 
 /* ═══ Pricing Card ═══ */
 function PricingCard({
@@ -499,16 +520,19 @@ function PricingCard({
 }) {
   return (
     <div
-      className={`relative rounded-2xl border p-6 sm:p-8 flex flex-col transition-all duration-300 ${
-        isPopular
-          ? 'border-purple-500/30 bg-[#0a0a0f] shadow-[0_0_40px_rgba(168,85,247,0.08)]'
-          : 'border-white/[0.06] bg-[#0a0a0f]'
-      }`}
+      className="relative rounded-2xl p-6 sm:p-8 flex flex-col transition-all duration-300"
+      style={{
+        background: 'var(--lp-card)',
+        border: '1px solid',
+        borderColor: isPopular ? accentColor : 'var(--lp-card-border)',
+        boxShadow: isPopular ? `0 0 40px ${accentColor}15, var(--lp-shadow-ring), var(--lp-shadow-ring-inset)` : 'var(--lp-shadow-ring), var(--lp-shadow-ring-inset)',
+      }}
     >
       {/* Popular badge */}
       {isPopular && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-wider uppercase bg-purple-500 text-white px-4 py-1 rounded-full">
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-wider uppercase px-4 py-1 rounded-full"
+            style={{ background: accentColor, color: '#fff' }}>
             <Star className="w-3 h-3" fill="currentColor" />
             Most Popular
           </span>
@@ -528,9 +552,9 @@ function PricingCard({
           {icon}
         </div>
         <div>
-          <h3 className="text-[16px] font-bold text-white/90">{name}</h3>
+          <h3 className="text-[16px] font-bold" style={{ color: 'var(--lp-text-heading)' }}>{name}</h3>
           {isCurrent && (
-            <span className="text-[10px] font-bold tracking-wider uppercase text-emerald-400">Current Plan</span>
+            <span className="text-[10px] font-bold tracking-wider uppercase" style={{ color: 'var(--lp-accent)' }}>Current Plan</span>
           )}
         </div>
       </div>
@@ -538,29 +562,34 @@ function PricingCard({
       {/* Price */}
       <div className="mb-2">
         {price === '0' ? (
-          <span className="text-[36px] font-bold tracking-[-0.03em] text-white/90">Free</span>
+          <span className="text-[36px] font-semibold tracking-tight" style={{ color: 'var(--lp-text-heading)' }}>Free</span>
         ) : (
           <div className="flex items-baseline gap-1">
-            <span className="text-[16px] text-white/50">{symbol}</span>
-            <span className="text-[36px] font-bold tracking-[-0.03em] text-white/90">{price}</span>
-            <span className="text-[14px] text-white/30">{period}</span>
+            <span className="text-[16px] font-medium" style={{ color: 'var(--lp-text-muted)' }}>{symbol}</span>
+            <span className="text-[36px] font-semibold tracking-tight" style={{ color: 'var(--lp-text-heading)' }}>{price}</span>
+            <span className="text-[14px] font-medium" style={{ color: 'var(--lp-text-faint)' }}>{period}</span>
           </div>
         )}
       </div>
 
-      <p className="text-[13px] text-white/30 mb-6">{description}</p>
+      <p className="text-[13px] font-medium mb-6" style={{ color: 'var(--lp-text-muted)' }}>{description}</p>
 
       {/* CTA */}
       <button
         onClick={onSelect}
         disabled={disabled || isLoading}
-        className={`w-full py-3 rounded-xl text-[14px] font-semibold transition-all duration-300 mb-6 ${
-          disabled
-            ? 'bg-white/[0.04] text-white/30 cursor-not-allowed'
-            : isPopular
-            ? 'bg-white text-black hover:shadow-[0_0_20px_rgba(168,85,247,0.3)] active:scale-[0.97]'
-            : 'bg-white/[0.06] text-white/80 hover:bg-white/[0.1] active:scale-[0.97]'
-        }`}
+        className="w-full py-3 rounded-[86px] text-[14px] font-semibold transition-opacity duration-200 mb-6"
+        style={{
+          background: disabled ? 'var(--lp-surface-hover)' : isPopular ? 'var(--lp-cta-bg)' : 'var(--lp-surface)',
+          color: disabled ? 'var(--lp-text-faint)' : isPopular ? 'var(--lp-cta-text)' : 'var(--lp-text-heading)',
+          border: '1px solid',
+          borderColor: disabled ? 'transparent' : isPopular ? 'transparent' : 'var(--lp-card-border)',
+          boxShadow: isPopular ? 'var(--lp-shadow-btn)' : 'rgba(255,255,255,0.1) 0px 1px 0px 0px inset',
+          opacity: (disabled && !isCurrent) ? 0.5 : 1,
+          cursor: disabled ? 'not-allowed' : 'pointer'
+        }}
+        onMouseEnter={(e) => !disabled && (e.currentTarget.style.opacity = '0.8')}
+        onMouseLeave={(e) => !disabled && (e.currentTarget.style.opacity = '1')}
       >
         {isLoading ? (
           <Loader2 className="w-4 h-4 animate-spin mx-auto" />
@@ -572,8 +601,8 @@ function PricingCard({
       {/* Features */}
       <ul className="space-y-2.5 flex-1">
         {features.map((f, i) => (
-          <li key={i} className="flex items-start gap-2.5 text-[13px] text-white/50">
-            <Check className="w-4 h-4 text-emerald-400/70 mt-0.5 shrink-0" />
+          <li key={i} className="flex items-start gap-2.5 text-[13px] font-medium" style={{ color: 'var(--lp-text-muted)' }}>
+            <Check className="w-4 h-4 mt-0.5 shrink-0" style={{ color: 'var(--lp-accent)' }} />
             <span>{f}</span>
           </li>
         ))}
@@ -582,21 +611,20 @@ function PricingCard({
   )
 }
 
-
 /* ═══ Comparison Cell ═══ */
 function ComparisonCell({ value }: { value: string | boolean }) {
   if (typeof value === 'boolean') {
     return (
       <div className="flex justify-center">
         {value ? (
-          <Check className="w-4 h-4 text-emerald-400" />
+          <Check className="w-4 h-4" style={{ color: 'var(--lp-accent)' }} />
         ) : (
-          <X className="w-4 h-4 text-white/15" />
+          <X className="w-4 h-4" style={{ color: 'var(--lp-text-faint)' }} />
         )}
       </div>
     )
   }
   return (
-    <div className="text-[13px] text-white/50 text-center">{value}</div>
+    <div className="text-[13px] font-medium text-center" style={{ color: 'var(--lp-text-muted)' }}>{value}</div>
   )
 }

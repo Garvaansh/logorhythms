@@ -39,10 +39,10 @@ export default function RaycastStats() {
           {stats.map((stat) => {
             const { ref, count } = useCounter(stat.num)
             return (
-              <motion.div key={stat.label} className="text-center lg:text-left"
+              <motion.div key={stat.label} className="text-center flex flex-col items-center"
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, margin: '-60px' }} transition={{ duration: 0.7, ease }}>
-                <div className="flex items-center justify-center lg:justify-start gap-2 mb-3" style={{ color: 'var(--lp-text-faint)' }}>{stat.icon}</div>
+                <div className="flex items-center justify-center gap-2 mb-3" style={{ color: 'var(--lp-text-faint)' }}>{stat.icon}</div>
                 <span ref={ref} className="text-[clamp(2rem,5vw,3.5rem)] font-semibold tracking-tight" style={{ color: 'var(--lp-text-heading)' }}>
                   {count.toLocaleString()}{stat.suffix}
                 </span>

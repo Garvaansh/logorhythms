@@ -61,14 +61,13 @@ export default function RaycastCTAFooter() {
                 <span className="text-[12px] tracking-wider uppercase font-semibold" style={{ color: 'var(--lp-text-faint)' }}>Company</span>
                 <div className="space-y-2">
                   <Link href="/auth/signin" className="block text-[13px] font-medium transition-opacity duration-200 hover:opacity-60" style={{ color: 'var(--lp-text-label)', letterSpacing: '0.2px' }}>Sign in</Link>
-                  <span className="block text-[13px] font-medium" style={{ color: 'var(--lp-text-label)', letterSpacing: '0.2px' }}>Team BitMask</span>
                 </div>
               </div>
             </div>
           </div>
           <div className="mt-12 pt-6 flex items-center justify-between" style={{ borderTop: '1px solid var(--lp-border)' }}>
             <span className="text-[12px] font-medium" style={{ color: 'var(--lp-text-faint)', letterSpacing: '0.2px' }}>© 2026 DocuVerse</span>
-            <span className="text-[12px] font-medium" style={{ color: 'var(--lp-text-faint)', letterSpacing: '0.2px' }}>Built with love by Logorhythms AI</span>
+            <span className="text-[12px] font-medium" style={{ color: 'var(--lp-text-faint)', letterSpacing: '0.2px' }}>Built by Team Logorhythms</span>
           </div>
         </div>
       </footer>

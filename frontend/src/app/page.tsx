@@ -4,10 +4,12 @@ import { motion } from 'framer-motion'
 import RaycastNav from '@/components/landing/RaycastNav'
 import RaycastHero from '@/components/landing/RaycastHero'
 import RaycastProductPreview from '@/components/landing/RaycastProductPreview'
+import RaycastSelectCode from '@/components/landing/RaycastSelectCode'
 import RaycastFeatures from '@/components/landing/RaycastFeatures'
 import RaycastHowItWorks from '@/components/landing/RaycastHowItWorks'
 import RaycastStats from '@/components/landing/RaycastStats'
 import RaycastFAQ from '@/components/landing/RaycastFAQ'
+import RaycastMCP from '@/components/landing/RaycastMCP'
 import RaycastCTAFooter from '@/components/landing/RaycastCTAFooter'
 
 export default function HomePage() {
@@ -41,6 +43,7 @@ export default function HomePage() {
       </div>
 
       <RaycastProductPreview />
+      <RaycastSelectCode />
       <RaycastFeatures />
       <RaycastHowItWorks />
       <RaycastStats />
@@ -85,52 +88,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── TESTIMONIALS ─── */}
-      <section className="relative py-28 sm:py-36 overflow-hidden" style={{ background: 'var(--lp-bg-alt)' }}>
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="mb-16">
-            <motion.p className="text-[14px] font-medium mb-4" style={{ color: 'var(--lp-accent)', letterSpacing: '0.2px' }}
-              initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: false }}>
-              What developers say
-            </motion.p>
-            <motion.h2 className="text-[40px] font-normal leading-[1.17]"
-              style={{ color: 'var(--lp-text-heading)', letterSpacing: '0.2px' }}
-              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }} transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}>
-              Trusted by builders
-            </motion.h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-4">
-            {[
-              { quote: 'DocuVerse turned a 3-week onboarding into 2 days. The AI narration is like having a senior engineer walk you through every file.', name: 'Arjun M.', role: 'Senior Engineer', avatar: 'A' },
-              { quote: 'I use the VS Code extension daily. It\'s like having a codebase tour guide that never gets tired. Game changer for our team.', name: 'Priya K.', role: 'Tech Lead', avatar: 'P' },
-              { quote: 'The architecture diagrams alone saved us countless hours. Combined with audio walkthroughs, it\'s the best dev tool we\'ve adopted this year.', name: 'Rahul S.', role: 'Engineering Manager', avatar: 'R' },
-            ].map((t, i) => (
-              <motion.div key={t.name}
-                className="relative rounded-2xl p-7 sm:p-8"
-                style={{
-                  background: 'var(--lp-card)',
-                  border: '1px solid var(--lp-card-border)',
-                  boxShadow: 'var(--lp-shadow-ring), var(--lp-shadow-ring-inset)',
-                }}
-                initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, margin: '-40px' }} transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1], delay: i * 0.12 }}>
-                <p className="text-[15px] font-medium leading-[1.60] mb-8" style={{ color: 'var(--lp-text-body)', letterSpacing: '0.2px' }}>&ldquo;{t.quote}&rdquo;</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full flex items-center justify-center text-[13px] font-bold"
-                    style={{ background: 'rgba(255,99,99,0.1)', color: 'var(--lp-accent)' }}>
-                    {t.avatar}
-                  </div>
-                  <div>
-                    <div className="text-[13px] font-semibold" style={{ color: 'var(--lp-text-heading)', letterSpacing: '0.2px' }}>{t.name}</div>
-                    <div className="text-[12px] font-medium" style={{ color: 'var(--lp-text-faint)', letterSpacing: '0.2px' }}>{t.role}</div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ─── MCP INTEGRATION ─── */}
+      <RaycastMCP />
 
       <RaycastFAQ />
       <RaycastCTAFooter />
