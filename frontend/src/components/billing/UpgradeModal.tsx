@@ -66,10 +66,17 @@ export default function UpgradeModal({ isOpen, onClose, feature, used, limit }: 
                 periodEnd: subInfo.current_period_end,
                 currency: subInfo.currency,
               })
+              alert(`🎉 ${result.message}`)
               onClose()
+            } else {
+              alert('Payment was processed but activation failed. Please contact support with your payment ID: ' + response.razorpay_payment_id)
             }
-          } catch (err) {
+          } catch (err: any) {
             console.error('Verification failed:', err)
+            const errorMsg = err?.message || err?.data?.detail || 'Unknown error'
+            alert(`Payment verification failed: ${errorMsg}\n\nYour payment ID: ${response.razorpay_payment_id}\nPlease contact support if money was deducted.`)
+          } finally {
+            setLoading(false)
           }
         },
         theme: { color: '#6366f1' },

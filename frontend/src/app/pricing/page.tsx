@@ -146,11 +146,17 @@ export default function PricingPage() {
                 periodEnd: subInfo.current_period_end,
                 currency: subInfo.currency,
               })
+              alert(`🎉 ${result.message}`)
               router.push('/dashboard')
+            } else {
+              alert('Payment was processed but activation failed. Please contact support with your payment ID: ' + response.razorpay_payment_id)
             }
-          } catch (err) {
+          } catch (err: any) {
             console.error('Payment verification failed:', err)
-            alert('Payment verification failed. Please contact support.')
+            const errorMsg = err?.message || err?.data?.detail || 'Unknown error'
+            alert(`Payment verification failed: ${errorMsg}\n\nYour payment ID: ${response.razorpay_payment_id}\nPlease contact support if money was deducted.`)
+          } finally {
+            setSubscribing(null)
           }
         },
         prefill: {},
