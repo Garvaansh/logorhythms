@@ -17,6 +17,8 @@ import {
 } from 'lucide-react'
 import { Sidebar } from '@/components/layout/Sidebar'
 import toast from 'react-hot-toast'
+import { useUserStore } from '@/lib/store'
+import { useRouter } from 'next/navigation'
 
 const ease = [0.23, 1, 0.32, 1] as const
 
@@ -29,9 +31,21 @@ const TABS = [
 export default function McpGuidePage() {
     const [activeTab, setActiveTab] = useState<typeof TABS[number]['id']>('claude')
 
+    const router = useRouter()
+
     const copyToClipboard = (text: string) => {
         navigator.clipboard.writeText(text)
         toast.success('Copied to clipboard')
+    }
+
+    const handleGetToken = () => {
+        const { isAuthenticated, token } = useUserStore.getState()
+        if (!isAuthenticated || !token) {
+            router.push('/auth/signin?redirect=/mcp-guide')
+            return
+        }
+        navigator.clipboard.writeText(token)
+        toast.success('JWT Token copied to clipboard!', { icon: '🔑' })
     }
 
     return (
@@ -116,8 +130,8 @@ export default function McpGuidePage() {
                             >
                                 Read Guide <ArrowRight className="w-4 h-4" />
                             </a>
-                            <Link
-                                href="/dashboard"
+                            <button
+                                onClick={handleGetToken}
                                 className="inline-flex items-center gap-2 px-6 py-3 rounded-[86px] text-[14px] font-semibold transition-opacity duration-200 hover:opacity-60"
                                 style={{
                                     color: 'var(--lp-text-muted)',
@@ -127,7 +141,7 @@ export default function McpGuidePage() {
                                 }}
                             >
                                 Get JWT Token
-                            </Link>
+                            </button>
                         </div>
                     </motion.div>
 
